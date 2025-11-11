@@ -6,6 +6,11 @@
   scroll-behavior: smooth;
 }
 
+body{
+  background-color: rgb(139, 25, 25);
+  color: #ffffff;
+}
+
 
 a{
   text-decoration: none;
