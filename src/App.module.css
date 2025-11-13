@@ -86,7 +86,7 @@
 }
 
 .s4 h2{
-    color: rgba(153, 50, 50, 0.829);
+    color: rgba(87, 24, 24, 0.829);
     font-size: 56px;
     letter-spacing: 10px;
     font-weight: bold;
@@ -99,7 +99,7 @@
     justify-content: center;
     gap: 10px;
     border-radius: 20px;
-    border: 2px solid #b33e2193;
+    border: 2px solid #c7432293;
     box-shadow: 0px 3px 20px #b36d5b5b;
     padding: 20px;
 
@@ -157,8 +157,52 @@
    padding: 20px;
    text-align: center;
    gap: 20px;
+
 }
 
+
+.foto{
+    width: 800px;
+    height: 500px;
+    transition: all 200ms ease-in-out;
+}
+
+.foto:hover{
+    transform: scale(1.1);
+}
+
+.foto input{
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    border: 2px solid  #b33e2193;
+
+}
+
+.s2{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 50px;
+}
+
+.tecTitlle{
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    font-size: 56px;
+    letter-spacing: 10px;
+    font-weight: bold;
+}
+
+.wrapCards{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
 
 
 @media (widht <=760px) {

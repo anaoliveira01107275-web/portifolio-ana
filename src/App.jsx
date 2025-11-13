@@ -4,17 +4,20 @@ import facebook from '/facebook.jpg'
 import instagram from '/instagram.jpg'
 import linkedin from '/linkedin.png'
 import whatsApp from '/whatsapp.webp'
-import HTMLImg from '/html.png'
-import CSSImg from '/css.webp'
-import JSImg from '/js.webp'
-import VITEImg from '/vite.webp'
-import VERCELImg from '/versel.png'
-import REACTImg from '/react.png'
 import foto from '/foto.jpg'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Card } from './components/card'
 
 function App() {
+  const [dados, setDados] = useState([])
+
+  useEffect(() => {
+      fetch('/cardsInfo.json').then(response => response.json())
+      .then(data => {
+        setDados(data)
+      })
+  }, [])
 
   const defaultPhoneNumber = '41984965196'
 
@@ -25,13 +28,13 @@ function App() {
   })
 
   const handleChange = (event) => {
-    const{name, value} = event.target
-    setFormData({...formData, [name]: value})
+    const { name, value } = event.target
+    setFormData({ ...formData, [name]: value })
   }
 
 
   const handleZap = () => {
-    const {name, email, message} = formData
+    const { name, email, message } = formData
 
     const urlZap = `https://api.whatsapp.com/send?phone=${defaultPhoneNumber}&text=
     Nome:%20${name}%0D%0A
@@ -59,8 +62,10 @@ function App() {
           </div>
           <div className={styles.right}>
             <h2 className={styles.titlle}>Ana Beatriz V. De Oliveira</h2>
-            <p className={styles.paragraph}>Desenvolvedora iniciante, tenho 15 anos sou estudante do 1° ano do ensino médio estou a procura do meu primeiro emprego, sou responsável
-              tenho facilidade de fazer as coisas conforme ordens de alguém não tenho problema com isso se for preciso trabalho em grupo.
+            <p className={styles.paragraph}>Desenvolvedora iniciante, tenho 15 anos sou
+               estudante do 1° ano do ensino médio estou a procura do meu primeiro emprego, sou responsável
+              tenho facilidade de fazer as coisas conforme ordens de alguém não tenho problema
+               com isso se for preciso trabalho em grupo.
             </p>
           </div>
           <h2></h2>
@@ -69,36 +74,15 @@ function App() {
         <section className={styles.s2} id='s2'>
           <h2 className={styles.tecTitle}>Tecnologias</h2>
           <div className={styles.wrapCards}>
-            <div className={styles.cards}>
-              <img width={80} src={HTMLImg} alt="HMTL" />
-              <h3>HTML</h3>
-              <p>HTML é a sigla para Hypertext Markup Language (Linguagem de Marcação de Hipertexto) e é a linguagem de marcação padrão usada para criar e estruturar páginas da web.</p>
-            </div>
-            <div className={styles.cards}>
-              <img width={80} src={CSSImg} alt="CSS" />
-              <h3>CSS</h3>
-              <p>CSS (Cascading Style Sheets) é uma linguagem de estilo usada para descrever a apresentação visual de um documento escrito em linguagem de marcação como HTML.</p>
-            </div>
-            <div className={styles.cards}>
-              <img width={80} src={JSImg} alt="JS" />
-              <h3>JS</h3>
-              <p>JavaScript é uma linguagem de programação leve, interpretada e versátil, usada para tornar páginas da web dinâmicas e interativas.</p>
-            </div>
-            <div className={styles.cards}>
-              <img width={80} src={VITEImg} alt="VITE" />
-              <h3>VITE</h3>
-              <p>Vite é uma ferramenta de build (compilação) e servidor de desenvolvimento para projetos de front-end, conhecida por sua velocidade e eficiência.</p>
-            </div>
-            <div className={styles.cards}>
-              <img width={80} src={REACTImg} alt="REACT" />
-              <h3>REACT</h3>
-              <p>React é uma biblioteca JavaScript de código aberto usada para construir interfaces de usuário (UI) interativas para sites e aplicativos.</p>
-            </div>
-            <div className={styles.cards}>
-              <img width={80} src={VERCELImg} alt="VERSEL" />
-              <h3>VERSEL</h3>
-              <p>Vercel é uma plataforma de nuvem que facilita o desenvolvimento e a implantação de sites e aplicativos web modernos. </p>
-            </div>
+              {dados.map((item) => {
+                return(
+                  <div key={item.id}> 
+                    <Card tec={item.tecnologia} image={item.imagem} text={item.texto}/>
+                  </div>
+                )
+              })}
+            
+           
           </div>
         </section>
 
@@ -108,13 +92,13 @@ function App() {
         </section>
 
         <section className={styles.s5} id='s5'>
-      
+
           <h2>Onde nasci</h2>
           <p>Nasci em são Paulo na vila prudente (zona leste) mas meus pais vieram para curitiba quando eu tinha apenas 9 message
-            mas eles viveram lá uns 6 anos em São Paulo meu pai era pintor e minha mãe trabalhava em uma farmácia o salário não era muito alto mas eles eram 
+            mas eles viveram lá uns 6 anos em São Paulo meu pai era pintor e minha mãe trabalhava em uma farmácia o salário não era muito alto mas eles eram
             bons administradores.
           </p>
-           <img className={styles.foto} src={foto} alt="Vila Prudente" />
+          <img className={styles.foto} src={foto} alt="Vila Prudente" />
         </section>
 
         <section id='s4' className={styles.s4}>
